@@ -46,6 +46,14 @@
       height: 100%;
     }
   </style>
+  <script>
+    // Set default source value if not present
+    const urlParams = new URLSearchParams(window.location.search);
+    const source = urlParams.get('source') || 'unspecified';
+    const formBase = "https://docs.google.com/forms/d/e/1FAIpQLSdtmSIFiPOcISNVOuNXPBwAEWyHr3N1FgRCsS5PoAA6rAmUAw/viewform?embedded=true";
+    const prefillParam = "&entry.1234567890=" + encodeURIComponent(source); // Replace entry ID with your actual field ID
+    window.formUrl = formBase + prefillParam;
+  </script>
 </head>
 <body>
   <header>
@@ -54,8 +62,11 @@
   <main>
     <p>Help shape the future of our community by ranking which ideas interest you most. The survey takes less than a minute and is completely anonymous.</p>
     <div class="iframe-container">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdtmSIFiPOcISNVOuNXPBwAEWyHr3N1FgRCsS5PoAA6rAmUAw/viewform?embedded=true" allowfullscreen></iframe>
+      <iframe id="surveyFrame" allowfullscreen></iframe>
     </div>
   </main>
+  <script>
+    document.getElementById('surveyFrame').src = window.formUrl;
+  </script>
 </body>
 </html>
